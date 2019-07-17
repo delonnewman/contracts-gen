@@ -32,7 +32,7 @@ module Contracts
 
     def generate
       h = {}
-      unless @optional.nil? or @optional.empty?
+      unless @required.nil? or @required.empty?
         @required.each do |(k, contract)|
           h[k] = ::Gen.generate(contract)
         end

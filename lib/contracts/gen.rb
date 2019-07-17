@@ -9,7 +9,7 @@ module Contracts
       if spec[:required] and spec[:optional]
         new(spec[:required], spec[:optional])
       elsif spec[:required]
-        new(spec[:required])
+        new(spec[:required], nil)
       elsif spec[:optional]
         new(nil, spec[:optional])
       else

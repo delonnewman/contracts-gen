@@ -2,41 +2,74 @@ require 'contracts'
 
 module Contracts::Builtin
   class Bool
-    def self.generate(true_ratio = 0.5)
+    def self.generate(true_ratio: 0.5)
       Random.rand < true_ratio
     end
   end
 
-  class Int
-    def self.generate(*_args)
-      i = Random.rand(10e10).to_i
+  class Num
+    def self.generate(min: -2e31.to_f, max: (2e31 - 1).to_f)
+      raise 'min should not be greater than max' if min > max
+      Random.rand(min..max)
+    end
+  end
 
-      if Bool.generate
-        i
+  class Int
+    def self.generate(min: -2e31, max: 2e31 - 1, neg_ratio: 0.5)
+      min_pos = min < 0 ? 0 : min
+      max_neg = max > -1 ? -1 : max
+
+      if Bool.generate(true_ratio: neg_ratio)
+        Num.generate(min: min, max: max_neg).to_i
       else
-        i * -1
+        Num.generate(min: min_pos, max: max).to_i
       end
     end
   end
 
+  class BigInt < Int
+    def self.generate(min: -2e63, max: 2e63 - 1)
+      super(min: min, max: max)
+    end
+  end
+
+  class SmallInt < Int
+    def self.generate(min: -2e15, max: 2e15 - 1)
+      super(min: min, max: max)
+    end
+  end
+
+  class TinyInt < Int
+    def self.generate(min: 0, max: 255)
+      super(min: min, max: max)
+    end
+  end
+
+  class Neg
+    def self.generate(min: -1_000, max: -1)
+      raise 'max should not be greater than -1' if max > -1
+      Num.generate(min: min, max: max).to_i
+    end
+  end
+
   class Pos
-    def self.generate(*_args)
-      pos = Random.rand(10e10).to_i
-      pos = Random.rand(10e10).to_i while pos.zero?
-      pos
+    def self.generate(min: 1, max: 1_000)
+      raise 'min should not be less than 1' if min < 1
+      Num.generate(min: min, max: max).to_i
     end
   end
 
   class Nat
-    def self.generate(*_args)
-      Random.rand(10e10).to_i
+    def self.generate(min: 0, max: 1_000)
+      raise 'min should not be less than 0' if min < 0
+      Num.generate(min: min, max: max).to_i
     end
   end
 
   class Maybe
-    def generate(*args)
-      if Bool.generate
-        @vals.reject(&:nil?).first.generate(*args)
+    def generate(nil_ratio: 0.5)
+      if Bool.generate(true_ratio: nil_ratio)
+        @vals.reject(&:nil?).first.generate
       else
         nil
       end
@@ -56,7 +89,7 @@ module Contracts::Builtin
   end
 
   class Or
-    def generate(*_args)
+    def generate
       @vals.sample.generate
     end
   end

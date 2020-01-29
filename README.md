@@ -18,7 +18,7 @@ C = Contracts
 class SumTest < Minitest::Test
   include Gen::Test
 
-  def test_incremented_for_all_integers
+  def test_sum_for_all_arrays_of_integers
     for_all C::ArrayOf[Integer] do |xs|
       y = Sum[xs]
       assert_equal(y, xs.reduce(:+))

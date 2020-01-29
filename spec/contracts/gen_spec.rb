@@ -1,9 +1,14 @@
-RSpec.describe Contracts::Gen do
-  it "has a version number" do
-    expect(Contracts::Gen::VERSION).not_to be nil
-  end
+C = Contracts
 
-  it "does something useful" do
-    expect(false).to eq(true)
+RSpec.describe Contracts::Gen do
+  include Gen::Test
+  
+  Sum = lambda { |xs| xs.reduce(:+) }
+
+  it 'should sum an array of integers' do
+    for_all C::ArrayOf[Integer] do |xs|
+      y = Sum[xs]
+      expect(y).to be(xs.reduce(:+))
+    end
   end
 end

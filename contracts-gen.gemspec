@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/delonnewman/contracts-gen"
   spec.license       = "MIT"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "faker", "~> 1.9.6"
   spec.add_runtime_dependency "gen-test", "~> 0.1.0"
+  spec.add_runtime_dependency "contracts", "~> 0.16.0"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"

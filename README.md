@@ -1,3 +1,6 @@
+![Ruby](https://github.com/delonnewman/contracts-gen/workflows/Ruby/badge.svg)
+[![Gem Version](https://badge.fury.io/rb/contracts-gen.svg)](https://badge.fury.io/rb/contracts-gen)
+
 Contracts::Gen
 ==============
 

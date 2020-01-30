@@ -6,15 +6,10 @@ require 'faker'
 module Contracts
   class Keys
     def self.[](spec)
-      if spec[:required] and spec[:optional]
-        new(spec[:required], spec[:optional])
-      elsif spec[:required]
-        new(spec[:required], nil)
-      elsif spec[:optional]
-        new(nil, spec[:optional])
-      else
-        raise "Invalid hash spec: #{spec.inspect}"
+      if !spec.key?(:required) and !spec.key?(:optional)
+        raise ':required or :optional keys must be specified'
       end
+      new(spec[:required], spec[:optional])
     end
 
     def initialize(required, optional)

@@ -40,7 +40,7 @@ module Contracts::Builtin
   end
 
   class TinyInt < Int
-    def self.generate(min: 0, max: 255)
+    def self.generate(min: -255, max: 255)
       super(min: min, max: max)
     end
   end

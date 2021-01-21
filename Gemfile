@@ -1,4 +1,5 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in contracts-gen.gemspec
 gemspec
+
+gem 'gen-test', git: 'https://github.com/delonnewman/gen-test.git'

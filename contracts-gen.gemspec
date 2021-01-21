@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "faker", "~> 1.9.6"
-  spec.add_runtime_dependency "gen-test", "~> 0.1.0"
+  spec.add_runtime_dependency "gen-test", "~> 0.2"
   spec.add_runtime_dependency "contracts", "~> 0.16.0"
 
   spec.add_development_dependency "bundler", "~> 2.0"

@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    contracts-gen (0.1.0)
+    contracts-gen (0.2.0)
       contracts (~> 0.16.0)
       faker (~> 1.9.6)
       gen-test (~> 0.2)
